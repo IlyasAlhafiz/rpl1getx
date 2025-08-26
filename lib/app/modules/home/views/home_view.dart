@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -14,17 +12,30 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('HomeView is working', style: TextStyle(fontSize: 20)),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('/counter'),
-              child: const Text('Go to Details'),
+        child: Text('HomeView is working', style: TextStyle(fontSize: 20)),
+      ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          InkWell(
+            onTap: () => Get.toNamed('/details'),
+            child: FloatingActionButton(
+              heroTag: 'details',
+              onPressed: () => Get.toNamed('/details'),
+              child: const Icon(Icons.details),
+              tooltip: 'Go to Details',
             ),
-          ],
-        ),
+          ),
+          
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            heroTag: 'form',
+            onPressed: () => Get.toNamed('/form-pendaftaran'),
+            child: const Icon(Icons.assignment),
+            tooltip: 'Go to Forms',
+          ),
+        ],
       ),
     );
   }
