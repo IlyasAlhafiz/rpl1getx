@@ -35,6 +35,19 @@ class HomeView extends GetView<HomeController> {
             child: const Icon(Icons.assignment),
             tooltip: 'Go to Forms',
           ),
+
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            onPressed:  () => Get.toNamed('/post'),
+            child: const Icon(Icons.post_add),
+            tooltip: 'Go to Posts',
+          ),
+
+          const SizedBox(height: 16),
+          FloatingActionButton(onPressed: () => Get.toNamed('/alquran'),
+            child: const Icon(Icons.book),
+            tooltip: 'Go to Alquran',
+          ),
         ],
       ),
     );
