@@ -22,7 +22,7 @@ class ProfileController extends GetxController {
       isLoading(true);
       final token = box.read('token');
 
-      if (token != null) {
+      if (token == null) {
         Get.snackbar(
           'Error',
           'No authentication token found',

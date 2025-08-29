@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rpl1getx/app/data/Models/post.dart';
+import 'package:rpl1getx/app/data/models/post.dart';
+import 'package:rpl1getx/app/middlewares/auth_middleware.dart';
+import 'package:rpl1getx/app/modules/post/views/post_create_view.dart';
+import 'package:rpl1getx/app/modules/post/views/post_edit_view.dart';
 
-import '../middlewares/auth_middleware.dart';
-import '../modules/FormPendaftaran/bindings/form_pendaftaran_binding.dart';
-import '../modules/FormPendaftaran/views/form_pendaftaran_view.dart';
 import '../modules/alquran/bindings/alquran_binding.dart';
 import '../modules/alquran/views/alquran_view.dart';
+
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/auth/views/login_view.dart';
@@ -30,7 +34,7 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
-      // middlewares: [AuthMiddleware()],
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.COUNTER,
@@ -39,26 +43,39 @@ class AppPages {
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
-      name: _Paths.FORM_PENDAFTARAN,
-      page: () => FormPendaftaranView(),
-      binding: FormPendaftaranBinding(),
-    ),
-    GetPage(
       name: _Paths.POST,
       page: () => PostView(),
       binding: PostBinding(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
-      name: _Paths.ALQURAN,
-      page: () => AlquranView(),
-      binding: AlquranBinding(),
+      name: _Paths.CREATE_POST,
+      page: () => CreatePostView(),
+      binding: PostBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: _Paths.EDIT_POST,
+      page: () {
+        final post = Get.arguments as DataPost?;
+        if (post == null) {
+          Get.offNamed(Routes.POST);
+          return Container();
+        }
+        return EditPostView(post: post);
+      },
+      binding: PostBinding(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.AUTH,
       page: () => const AuthView(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALQURAN,
+      page: () => AlquranView(),
+      binding: AlquranBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -74,6 +91,7 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+      middlewares: [AuthMiddleware()],
     ),
   ];
 }
